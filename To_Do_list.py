@@ -9,26 +9,21 @@ class TodoListApp(tk.Tk):
         self.geometry("500x550")
         self.configure(bg="#f0f0f0")
         
-        # Configure the grid layout
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
         
-        # Task input with placeholder behavior
         self.task_input = ttk.Entry(self, font=("Helvetica", 14), width=30)
         self.task_input.grid(row=0, column=0, padx=20, pady=10)
         self.task_input.insert(0, "Enter your tasks:")
         self.task_input.bind("<FocusIn>", self.clear_placeholder)
         self.task_input.bind("<FocusOut>", self.restore_placeholder)
         
-        # Task list
         self.task_list = tk.Listbox(self, font=("Helvetica", 14), height=10, selectmode=tk.SINGLE, bg="#ffffff", fg="#333333")
         self.task_list.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
         
-        # Frame for buttons
         button_frame = tk.Frame(self, bg="#f0f0f0")
         button_frame.grid(row=2, column=0, pady=10)
         
-        # Buttons for adding, marking done, deleting, and viewing status
         self.add_button = ttk.Button(button_frame, text="Add", command=self.add_task, style="Add.TButton")
         self.add_button.grid(row=0, column=0, padx=5)
         
@@ -41,7 +36,6 @@ class TodoListApp(tk.Tk):
         self.view_status_button = ttk.Button(button_frame, text="View Status", command=self.view_status, style="Status.TButton")
         self.view_status_button.grid(row=0, column=3, padx=5)
         
-        # Custom styles
         style = ttk.Style()
         style.configure("Add.TButton", background="#5cb85c", font=("Helvetica", 12, "bold"))
         style.configure("Done.TButton", background="#0275d8", font=("Helvetica", 12, "bold"))
@@ -51,7 +45,6 @@ class TodoListApp(tk.Tk):
                   background=[("active", "!disabled", "#e6e6e6")],
                   foreground=[("active", "!disabled", "#333333")])
         
-        # Load tasks from JSON file
         self.load_tasks()
     
     def view_status(self):
